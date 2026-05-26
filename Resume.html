@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="cj-oliveyoung">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>장상 이력서 — CJ올리브영 W케어 PM</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="assets/tokens.css" />
+<style>
+  /* Resume-only */
+  .page { padding: 36px 40px; }
+  .rs-header {
+    margin: -36px -40px 0;
+    padding: 24px 40px 20px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+    position: relative;
+    overflow: hidden;
+  }
+  .rs-header::after {
+    content: '';
+    position: absolute;
+    right: -80px;
+    bottom: -100px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .rs-header__left { z-index: 1; }
+  .rs-eyebrow {
+    font-size: 11px;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.22em;
+    opacity: 0.85;
+  }
+  .rs-name {
+    font-size: 40px;
+    font-weight: var(--font-extrabold);
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin-top: 6px;
+  }
+  .rs-name span {
+    font-size: 14px;
+    font-weight: var(--font-medium);
+    opacity: 0.85;
+    margin-left: 10px;
+    letter-spacing: -0.01em;
+  }
+  .rs-role {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: var(--font-medium);
+    opacity: 0.9;
+  }
+  .rs-contact {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+    font-size: 12px;
+    opacity: 0.92;
+  }
+  .rs-contact { font-size: 11px; }
+  .rs-contact dt {
+    font-size: 9px;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.18em;
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+  .rs-contact dd { margin: 0 0 4px; font-weight: var(--font-semibold); }
+  .rs-contact dd:last-child { margin-bottom: 0; }
+
+  .rs-tagline {
+    margin: 14px -40px 0;
+    padding: 12px 40px;
+    background: var(--color-secondary);
+    border-top: 1px solid var(--color-secondary-dark);
+    border-bottom: 1px solid var(--color-secondary-dark);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-gray-900);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .rs-tagline::before {
+    content: '';
+    width: 3px;
+    align-self: stretch;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+  .rs-tagline strong { color: var(--color-primary-dark); font-weight: var(--font-bold); }
+
+  .rs-section {
+    margin-top: 10px;
+  }
+  .rs-section__title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .rs-section__title h2 {
+    font-size: 12px;
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .rs-section__title .meta {
+    font-size: 10.5px;
+    color: var(--color-gray-500);
+    letter-spacing: 0.04em;
+  }
+
+  /* Highlight stat row at top */
+  .rs-highlight {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .rs-highlight__card {
+    border: 1px solid var(--color-primary-30);
+    background: var(--color-primary-light);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .rs-highlight__num {
+    font-size: 10px;
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+    letter-spacing: 0.12em;
+  }
+  .rs-highlight__value {
+    font-size: 18px;
+    font-weight: var(--font-extrabold);
+    color: var(--color-gray-900);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+    margin-top: 3px;
+  }
+  .rs-highlight__value small { font-size: 12px; font-weight: var(--font-bold); color: var(--color-gray-600); }
+  .rs-highlight__label {
+    font-size: 12px;
+    color: var(--color-gray-700);
+    font-weight: var(--font-semibold);
+    margin-top: 5px;
+  }
+  .rs-highlight__ctx {
+    font-size: 11px;
+    color: var(--color-gray-500);
+    line-height: 1.45;
+    margin-top: 2px;
+  }
+
+  /* Career rows */
+  .rs-career {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rs-career__item {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-gray-200);
+    align-items: start;
+  }
+  .rs-career__item:last-child { border-bottom: 0; padding-bottom: 0; }
+  .rs-career__item:last-child + .rs-section { margin-top: 8px; }
+  .rs-career__period {
+    font-size: 11.5px;
+    color: var(--color-gray-600);
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+  }
+  .rs-career__period .role {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-gray-500);
+    font-size: 10.5px;
+  }
+  .rs-career__body { display: flex; flex-direction: column; gap: 3px; }
+  .rs-career__company {
+    display: flex; align-items: baseline; gap: 8px;
+    font-size: 13.5px; font-weight: var(--font-bold); color: var(--color-gray-900);
+    letter-spacing: -0.015em;
+  }
+  .rs-career__company .tag {
+    font-size: 9.5px;
+    background: var(--color-gray-100);
+    color: var(--color-gray-600);
+    padding: 1px 7px;
+    border-radius: var(--radius-full);
+    font-weight: var(--font-semibold);
+  }
+  .rs-career__impact {
+    font-size: 12px;
+    color: var(--color-gray-700);
+    line-height: 1.55;
+  }
+  .rs-career__impact strong { color: var(--color-primary-dark); font-weight: var(--font-bold); }
+
+  /* Case table */
+  .rs-case-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 11px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .rs-case-table th {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 7px 10px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: var(--font-bold);
+    letter-spacing: 0.02em;
+  }
+  .rs-case-table td {
+    padding: 6px 10px;
+    border-top: 1px solid var(--color-gray-200);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .rs-case-table tr:nth-child(even) td { background: var(--color-gray-50); }
+  .rs-case-table .case-name { font-weight: var(--font-bold); color: var(--color-gray-900); width: 28%; }
+  .rs-case-table .impact { color: var(--color-primary-dark); font-weight: var(--font-semibold); width: 36%; }
+  .rs-case-table .fit { color: var(--color-gray-700); }
+
+  /* 2-column body grid (lower half) */
+  .rs-body-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 30px;
+    margin-top: 18px;
+    align-items: start;
+  }
+  .rs-body-grid .rs-main,
+  .rs-body-grid .rs-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .rs-body-grid .rs-section { margin-top: 0; }
+
+  /* Sidebar tweaks: rating + skills vertical */
+  .rs-sidebar .rs-rating { grid-template-columns: 1fr; gap: 6px; }
+  .rs-sidebar .rs-skills {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .rs-sidebar .rs-skills dt {
+    padding-top: 10px;
+    margin-top: 4px;
+    border-top: 1px solid var(--color-gray-200);
+    padding-bottom: 4px;
+  }
+  .rs-sidebar .rs-skills dt:first-of-type {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: 0;
+  }
+  .rs-sidebar .rs-skills dd { padding-bottom: 4px; }
+
+  /* Main column career: narrower period col */
+  .rs-main .rs-career__item {
+    grid-template-columns: 108px 1fr;
+    gap: 10px;
+  }
+
+  /* Rating */
+  .rs-rating {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 8px;
+  }
+  .rs-rating__item {
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    padding: 11px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 11.5px;
+  }
+  .rs-rating__item .time {
+    color: var(--color-gray-500);
+    font-weight: var(--font-medium);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+  .rs-rating__item .grade {
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    font-size: 12.5px;
+    letter-spacing: -0.01em;
+  }
+  .rs-rating__item--top {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+  }
+  .rs-rating__item--top .time { color: rgba(255,255,255,0.75); }
+  .rs-rating__item--top .grade { color: var(--color-white); }
+
+  /* Skills */
+  .rs-skills {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 4px 14px;
+    font-size: 11px;
+    align-items: start;
+  }
+  .rs-skills dt {
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    font-size: 10.5px;
+    padding-top: 3px;
+  }
+  .rs-skills dd { margin: 0; color: var(--color-gray-700); line-height: 1.5; }
+  .rs-skills dd .k {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 2px 3px 2px 0;
+    border-radius: var(--radius-full);
+    background: var(--color-gray-100);
+    color: var(--color-gray-700);
+    font-size: 10.5px;
+    font-weight: var(--font-semibold);
+  }
+  .rs-skills dd .k--accent {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+  }
+
+  .rs-footer {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-gray-200);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--color-gray-500);
+  }
+
+  /* Web nav */
+  .web-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+  .web-nav__inner {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 12.5px;
+  }
+  .web-nav__brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    letter-spacing: -0.01em;
+  }
+  .web-nav__brand .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--color-primary);
+  }
+  .web-nav__links {
+    display: flex; gap: 14px;
+    color: var(--color-gray-600);
+    font-weight: var(--font-medium);
+  }
+  .web-nav__links a:hover { color: var(--color-primary); }
+  .web-nav__print {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-weight: var(--font-semibold);
+    font-size: 12px;
+    border: 0;
+    cursor: pointer;
+  }
+  .web-nav__print:hover { background: var(--color-primary-dark); }
+
+  @media screen and (max-width: 880px) {
+    .rs-header { padding: 22px 22px 20px; }
+    .rs-header { grid-template-columns: 1fr; gap: 14px; }
+    .rs-contact { text-align: left; }
+    .rs-name { font-size: 32px; }
+    .rs-name span { display: block; margin: 4px 0 0; }
+    .rs-tagline { margin-left: -22px; margin-right: -22px; padding: 12px 22px; }
+    .rs-highlight { grid-template-columns: 1fr; }
+    .rs-body-grid { grid-template-columns: 1fr; gap: 18px; }
+    .rs-main .rs-career__item { grid-template-columns: 1fr; gap: 4px; }
+    .rs-career__item { grid-template-columns: 1fr; gap: 4px; }
+    .rs-rating { grid-template-columns: 1fr; }
+    .rs-sidebar .rs-skills { grid-template-columns: 1fr; gap: 2px 0; }
+    .rs-skills { grid-template-columns: 1fr; gap: 2px 0; }
+    .rs-skills dt { margin-top: 8px; }
+    .rs-case-table { font-size: 11px; }
+    .rs-case-table td, .rs-case-table th { padding: 6px 8px; }
+    .web-nav__links { display: none; }
+  }
+  @media print {
+    .web-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="web-nav no-print" aria-label="Top">
+  <div class="web-nav__inner">
+    <div class="web-nav__brand">
+      <span class="dot"></span>
+      <span>장상 · Resume</span>
+      <span style="color: var(--color-gray-400); font-weight: var(--font-regular); margin-left: 4px;">CJ올리브영 W케어 PM 지원</span>
+    </div>
+    <div class="web-nav__links">
+      <a href="Portfolio.html">포트폴리오</a>
+      <a href="index.html">전체</a>
+    </div>
+    <button class="web-nav__print" onclick="window.print()">PDF 저장</button>
+  </div>
+</nav>
+
+<!-- ============================================================
+     RESUME — 1 PAGE A4
+     ============================================================ -->
+<section class="page" data-screen-label="Resume">
+
+  <!-- Header -->
+  <header class="rs-header">
+    <div class="rs-header__left">
+      <div class="rs-eyebrow">CUSTOMER · WELLNESS · RETENTION · COMMERCE</div>
+      <h1 class="rs-name">장상<span>Product Manager · 7년+</span></h1>
+      <div class="rs-role">CJ올리브영 W-Care PM 지원 · 2026</div>
+    </div>
+    <dl class="rs-contact">
+      <dt>EMAIL</dt><dd><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f298939c95cbc0cbc3b29a939c9f939b9edc9c9786">[email&#160;protected]</a></dd>
+      <dt>2025 RATING</dt><dd>Exceptionally Distinctive</dd>
+    </dl>
+  </header>
+
+  <!-- Tagline -->
+  <p class="rs-tagline">
+    <strong>고객 행동 데이터</strong>를 기반으로 <strong>신사업 가설</strong>을 검증하고,
+    <strong>반복 사용과 전환 구조</strong>를 설계해온 PM.
+  </p>
+
+  <!-- Highlights -->
+  <div class="rs-section">
+    <div class="rs-section__title">
+      <h2>Top 3 임팩트</h2>
+      <span class="meta">2022 – 2025 · 4년</span>
+    </div>
+    <div class="rs-highlight">
+      <div class="rs-highlight__card">
+        <div class="rs-highlight__num">01</div>
+        <div class="rs-highlight__value">21.24<small>%</small></div>
+        <div class="rs-highlight__label">실험 기반 CTA 검증</div>
+        <div class="rs-highlight__ctx">예약 CTA · 목표 10.83% 대비 2배</div>
+      </div>
+      <div class="rs-highlight__card">
+        <div class="rs-highlight__num">02</div>
+        <div class="rs-highlight__value">연환산 1,825<small>만원</small></div>
+        <div class="rs-highlight__label">신사업 BM 단독 0 → 1 검증</div>
+        <div class="rs-highlight__ctx">숨고 알바 유료화 · CAC −86%</div>
+      </div>
+      <div class="rs-highlight__card">
+        <div class="rs-highlight__num">03</div>
+        <div class="rs-highlight__value">월 1.46<small>억</small></div>
+        <div class="rs-highlight__label">반복 사용 / 예약 이탈 복구 구조</div>
+        <div class="rs-highlight__ctx">엔카 진단예약 취소 슬롯 알림 · MoM +82.71%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Career + Cases on left | Rating + Skills on right -->
+  <div class="rs-body-grid">
+
+    <!-- LEFT — Career & Cases -->
+    <div class="rs-main">
+
+      <!-- Career -->
+      <div class="rs-section">
+        <div class="rs-section__title">
+          <h2>경력 요약</h2>
+          <span class="meta">총 7년+ · 4개사</span>
+        </div>
+        <div class="rs-career">
+          <div class="rs-career__item">
+            <div class="rs-career__period">
+              2024.03 – 현재
+              <span class="role">PM · 플랫폼전략팀</span>
+            </div>
+            <div class="rs-career__body">
+              <div class="rs-career__company">엔카닷컴 <span class="tag">중고차 플랫폼</span></div>
+              <div class="rs-career__impact">
+                진단예약 <strong>월 1.46억</strong> · 채팅 리드 <strong>+39.4%</strong>
+                <br/>NPS 전사 최초 표준화 · SEO CAR <strong>+97.6%</strong>
+              </div>
+            </div>
+          </div>
+          <div class="rs-career__item">
+            <div class="rs-career__period">
+              2022.07 – 2023.12
+              <span class="role">PO · Core Squad<br/>(신사업 BM)</span>
+            </div>
+            <div class="rs-career__body">
+              <div class="rs-career__company">브레이브모바일 (숨고) <span class="tag">양면 매칭</span></div>
+              <div class="rs-career__impact">
+                신사업 BM <strong>0 → 1 단독 완주</strong> · 광고 BM 단독 PO
+                <br/>예약 CTA 실험 · 알바 유료화 (연환산 <strong>1,825만원</strong> · <strong>CAC −86%</strong>)
+              </div>
+            </div>
+          </div>
+          <div class="rs-career__item">
+            <div class="rs-career__period">
+              2021.07 – 2022.06
+              <span class="role">PO · 파트너 Squad</span>
+            </div>
+            <div class="rs-career__body">
+              <div class="rs-career__company">에이팀벤처스 (CAPA) <span class="tag">B2B 매칭</span></div>
+              <div class="rs-career__impact">B2B 매칭 플랫폼 기획 · 파트너 운영</div>
+            </div>
+          </div>
+          <div class="rs-career__item">
+            <div class="rs-career__period">
+              2018.02 – 2020.07
+              <span class="role">서비스 기획 ·<br/>파트너 운영</span>
+            </div>
+            <div class="rs-career__body">
+              <div class="rs-career__company">꿈꾸는다락방 (캐스팅엔) <span class="tag">B2B O2O</span></div>
+              <div class="rs-career__impact">B2B O2O 매칭 서비스 기획 · 파트너 발굴·운영</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Cases -->
+      <div class="rs-section">
+        <div class="rs-section__title">
+          <h2>핵심 케이스 4</h2>
+          <span class="meta">상세는 포트폴리오 3P – 6P</span>
+        </div>
+        <table class="rs-case-table">
+          <thead>
+            <tr>
+              <th style="width:34%;">케이스</th>
+              <th style="width:34%;">임팩트</th>
+              <th>W케어 적용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="case-name">엔카 진단예약<br/>취소 알림</td>
+              <td class="impact">월 1.46억 · MoM +82.71%<br/>슬롯 재활용 7.30%</td>
+              <td class="fit">본앱 ↔ W케어 앱인앱<br/>↔ 올리브베러 옴니채널</td>
+            </tr>
+            <tr>
+              <td class="case-name">엔카 NPS 표준화<br/>+ VOC 자동 구조화</td>
+              <td class="impact">전사 최초 표준화<br/>주간 의사결정 인프라</td>
+              <td class="fit">정성 피드백 → SKU·콘텐츠<br/>의사결정 자동화</td>
+            </tr>
+            <tr>
+              <td class="case-name">숨고 광고 BM MVP<br/>단독 PO</td>
+              <td class="impact">CVR +120%<br/>월 매출 시뮬 ≈ 3,300만</td>
+              <td class="fit">신규 브랜드 발견성 ·<br/>주기·증상 타겟 노출</td>
+            </tr>
+            <tr>
+              <td class="case-name">숨고 예약/지도 MVP<br/>CTA 실험</td>
+              <td class="impact">CTA 21.24% (목표 2배)<br/>합산 전환 +42.8%</td>
+              <td class="fit">기능 우선순위 →<br/>실험 기반 go/not-go</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- RIGHT — Rating & Skills -->
+    <aside class="rs-sidebar">
+
+      <!-- Rating -->
+      <div class="rs-section">
+        <div class="rs-section__title">
+          <h2>사내 평가 등급</h2>
+          <span class="meta">엔카닷컴</span>
+        </div>
+        <div class="rs-rating">
+          <div class="rs-rating__item">
+            <span class="time">2024 연말</span>
+            <span class="grade">Above Track</span>
+          </div>
+          <div class="rs-rating__item rs-rating__item--top">
+            <span class="time">2025 연말</span>
+            <span class="grade">Exceptionally Distinctive <small style="opacity:.85; font-weight: var(--font-medium); display:block; margin-top: 2px;">Next Role Ready</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="rs-section">
+        <div class="rs-section__title">
+          <h2>도구 · 역량 키워드</h2>
+        </div>
+        <dl class="rs-skills">
+          <dt>PM 방법론</dt>
+          <dd>
+            <span class="k k--accent">양면시장 BM 설계</span>
+            <span class="k k--accent">실험 기반 MVP 검증</span>
+            <span class="k">데이터 기반 의사결정</span>
+            <span class="k">지표·정책 표준화</span>
+          </dd>
+          <dt>도메인</dt>
+          <dd>
+            <span class="k k--accent">신사업 BM 0 → 1</span>
+            <span class="k">O2O · 양면시장</span>
+            <span class="k">앱인앱</span>
+            <span class="k">펨테크 인접</span>
+          </dd>
+          <dt>데이터 · 운영</dt>
+          <dd>
+            <span class="k k--accent">VOC 구조화 · QA 루프</span>
+            <span class="k">정성 데이터 자동 분류</span>
+            <span class="k">Tableau · SQL</span>
+          </dd>
+          <dt>협업 툴</dt>
+          <dd>
+            <span class="k">Jira · Confluence</span>
+            <span class="k">Amplitude</span>
+            <span class="k">Figma · Cursor</span>
+          </dd>
+        </dl>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <div class="rs-footer">
+    <span>장상 · 이력서 v2.0 — CJ올리브영 W-Care PM 지원 전용</span>
+    <span>2026 · A4 1P</span>
+  </div>
+
+</section>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
